@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 SCRIPT_PATH=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)
 BACKUPS=$SCRIPT_PATH/backups
 
@@ -85,7 +84,7 @@ space
                 return 1
             fi
         fi
- done
+    done
 }
 
 add_user(){
@@ -110,7 +109,7 @@ add_user(){
                 echo $user_ID
                 echo "------ Add user - $username to /etc/passwd ------"
                 echo "Processing ......"
-                echo "$username:x:$user_ID:$group_ID:$username,,,:/home/$username:/bin/bash" >> >
+                echo "$username:x:$user_ID:$group_ID:$username,,,:/home/$username:/bin/bash" >> /etc/passwd
                 echo "Done"
     else
         echo "User - $username - exist!!!"
@@ -122,11 +121,12 @@ add_user(){
                 echo "------ Addgroup - $username to /etc/group ------"
                 echo "Processing ......"
                 echo "$username:x:$group_ID:" >> /etc/group
-                    else
+                echo "Done"
+    else
         echo "Group $username - exist!!!"
     fi
 
-    #Create passord for user
+      #Create passord for user
     yes $pass | passwd $username
 
     #Create dir and change permissions
@@ -160,7 +160,7 @@ space
      case $opt in
         "Create new user")
            add_user
-            break
+           break
            ;;
         "Backup user")
            backup_user
@@ -181,5 +181,3 @@ space
       esac
    done
  done
-
-
