@@ -54,7 +54,35 @@ users_list(){
 }
 
 delete_user(){
-exit
+space
+    while :
+    do
+        read -p "Enter user name: " username
+        if [ -z $username ]
+        then
+            Error "Error" "Username can't be empty"
+        else
+            if id $username &> /etc/null
+            then
+
+                if confirm "Completely delete user (y/n or press enter for n)";
+                then
+                    sed -i "/$username:/d" /etc/passwd
+                    sed -i "/$username:/d" /etc/shadow
+                    sed -i "/$username:/d" /etc/group
+                    cd /home
+                    rm -r $username
+                    Info "Info" "User $username deleted"
+                    space
+                fi
+                return 0
+            else
+                Error "Error" "User $username does not found!"
+                space
+                return 1
+            fi
+        fi
+    done
 }
 
 backup_user(){
