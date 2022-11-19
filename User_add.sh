@@ -107,7 +107,7 @@ space
                 space
                 return 0
             else
-                Error "Error" "User $user does not found!"
+                Error "Error" "User $username does not found!"
                 space
                 return 1
             fi
@@ -121,7 +121,7 @@ add_user(){
     read -p "Enter user name: " username
 
     if id -u "$username" >/dev/null 2>&1; then
-        Error "Error" "User $user exists. Try to set another user name."
+        Error "Error" "User $username exists. Try to set another user name."
     else
         Info "Info" "User $username will be create.."
 
